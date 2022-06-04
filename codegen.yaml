@@ -1,0 +1,6 @@
+schema:
+  - https://api.spacex.land/graphql/
+generates:
+  ./schema.graphql:
+    plugins:
+      - schema-ast
