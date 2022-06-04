@@ -1,6 +1,6 @@
 import graphql from "babel-plugin-relay/macro";
 import { loadQuery, PreloadedQuery, usePreloadedQuery } from "react-relay";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { MissionListQuery } from "./__generated__/MissionListQuery.graphql";
 
 const missionListQuery = graphql`
@@ -18,13 +18,18 @@ export const missionListQueryLoader = (environment: any) =>
 export const MissionList = () => {
   const _data = useLoaderData() as PreloadedQuery<MissionListQuery>;
   const data = usePreloadedQuery<MissionListQuery>(missionListQuery, _data);
-  console.log(data);
+
   return (
     <div>
       MissionList
-      <div>
+      <div style={{ display: "flex", flexDirection: "column" }}>
         {data.missions?.map(
-          (mission) => mission && <div key={mission.id}>{mission.name}</div>
+          (mission) =>
+            mission?.id && (
+              <Link key={mission.id} to={mission.id}>
+                {mission.name}
+              </Link>
+            )
         )}
       </div>
     </div>
