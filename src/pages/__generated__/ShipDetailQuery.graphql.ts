@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<fa6bc69f1c717e1449f2dfd2f86001b5>>
+ * @generated SignedSource<<210f42c3e0ea5919034a1a55a1e3befc>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,21 +9,19 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
-export type MissionDetailQuery$variables = {
+export type ShipDetailQuery$variables = {
   id: string;
 };
-export type MissionDetailQuery$data = {
-  readonly mission: {
+export type ShipDetailQuery$data = {
+  readonly ship: {
     readonly name: string | null;
-    readonly description: string | null;
-    readonly twitter: string | null;
-    readonly website: string | null;
-    readonly wikipedia: string | null;
+    readonly model: string | null;
+    readonly image: string | null;
   } | null;
 };
-export type MissionDetailQuery = {
-  variables: MissionDetailQuery$variables;
-  response: MissionDetailQuery$data;
+export type ShipDetailQuery = {
+  variables: ShipDetailQuery$variables;
+  response: ShipDetailQuery$data;
 };
 
 const node: ConcreteRequest = (function(){
@@ -52,28 +50,14 @@ v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "description",
+  "name": "model",
   "storageKey": null
 },
 v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "twitter",
-  "storageKey": null
-},
-v5 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "website",
-  "storageKey": null
-},
-v6 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "wikipedia",
+  "name": "image",
   "storageKey": null
 };
 return {
@@ -81,21 +65,19 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "MissionDetailQuery",
+    "name": "ShipDetailQuery",
     "selections": [
       {
         "alias": null,
         "args": (v1/*: any*/),
-        "concreteType": "Mission",
+        "concreteType": "Ship",
         "kind": "LinkedField",
-        "name": "mission",
+        "name": "ship",
         "plural": false,
         "selections": [
           (v2/*: any*/),
           (v3/*: any*/),
-          (v4/*: any*/),
-          (v5/*: any*/),
-          (v6/*: any*/)
+          (v4/*: any*/)
         ],
         "storageKey": null
       }
@@ -107,21 +89,19 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "MissionDetailQuery",
+    "name": "ShipDetailQuery",
     "selections": [
       {
         "alias": null,
         "args": (v1/*: any*/),
-        "concreteType": "Mission",
+        "concreteType": "Ship",
         "kind": "LinkedField",
-        "name": "mission",
+        "name": "ship",
         "plural": false,
         "selections": [
           (v2/*: any*/),
           (v3/*: any*/),
           (v4/*: any*/),
-          (v5/*: any*/),
-          (v6/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -135,16 +115,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "ddbb8ecd41a64dd67a4bc403d439ef93",
+    "cacheID": "7eb80fd23a6670ddbd62d4f49d215519",
     "id": null,
     "metadata": {},
-    "name": "MissionDetailQuery",
+    "name": "ShipDetailQuery",
     "operationKind": "query",
-    "text": "query MissionDetailQuery(\n  $id: ID!\n) {\n  mission(id: $id) {\n    name\n    description\n    twitter\n    website\n    wikipedia\n    id\n  }\n}\n"
+    "text": "query ShipDetailQuery(\n  $id: ID!\n) {\n  ship(id: $id) {\n    name\n    model\n    image\n    id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "c1594a01f3a7761160a274cf88fef219";
+(node as any).hash = "b1e978a56349add6d13d5df36eae71bb";
 
 export default node;

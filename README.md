@@ -17,40 +17,35 @@ Relay Render-as-You-Fetch with react-router
 
 ## Code
 
-```
+```typescript
 <DataBrowserRouter fallbackElement={<></>}>
   <Route
     path="/"
-    element={<MissionList />}
-    loader={() => missionListQueryLoader(environment)}
+    element={<ShipList />}
+    loader={() => shipListQueryLoader(environment)}
   />
   <Route
     path="/:id"
-    element={<MissionDetail />}
-    loader={({ params }) =>
-      missionDetailLoader(environment, params.id!)
-    }
+    element={<ShipDetail />}
+    loader={({ params }) => shipDetailLoader(environment, params.id!)}
   />
 </DataBrowserRouter>
 ```
 
-```
-export const missionListQueryLoader = (environment: any) =>
-  loadQuery(environment, missionListQuery, {});
+```typescript
+export const shipListQueryLoader = (environment: Environment) =>
+  loadQuery(environment, shipListQuery, {});
 
-export const MissionList = () => {
-  const _data = useLoaderData() as PreloadedQuery<MissionListQuery>;
-  const data = usePreloadedQuery<MissionListQuery>(missionListQuery, _data);
+export const ShipList = () => {
+  const _data = useLoaderData() as PreloadedQuery<ShipListQuery>;
+  const data = usePreloadedQuery<ShipListQuery>(shipListQuery, _data);
 ```
 
-```
-export const missionDetailLoader = (enviroment: any, missionId: string) =>
-  loadQuery(enviroment, missionDetailQuery, { id: missionId });
+```typescript
+export const shipDetailLoader = (environment: Environment, shipId: string) =>
+  loadQuery(environment, shipDetailQuery, { id: shipId });
 
-export const MissionDetail = () => {
-  const _data = useLoaderData() as PreloadedQuery<MissionDetailQuery>;
-  const { mission } = usePreloadedQuery<MissionDetailQuery>(
-    missionDetailQuery,
-    _data
-  );
+export const ShipDetail = () => {
+  const _data = useLoaderData() as PreloadedQuery<ShipDetailQuery>;
+  const { ship } = usePreloadedQuery<ShipDetailQuery>(shipDetailQuery, _data);
 ```

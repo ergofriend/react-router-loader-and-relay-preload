@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<f0b6b22543807e4f60a3332231a343e1>>
+ * @generated SignedSource<<85ac9b9dbdf292792e17492b5376ac31>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,16 +9,17 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
-export type MissionListQuery$variables = {};
-export type MissionListQuery$data = {
-  readonly missions: ReadonlyArray<{
+export type ShipListQuery$variables = {};
+export type ShipListQuery$data = {
+  readonly ships: ReadonlyArray<{
     readonly id: string | null;
     readonly name: string | null;
+    readonly image: string | null;
   } | null> | null;
 };
-export type MissionListQuery = {
-  variables: MissionListQuery$variables;
-  response: MissionListQuery$data;
+export type ShipListQuery = {
+  variables: ShipListQuery$variables;
+  response: ShipListQuery$data;
 };
 
 const node: ConcreteRequest = (function(){
@@ -26,9 +27,9 @@ var v0 = [
   {
     "alias": null,
     "args": null,
-    "concreteType": "Mission",
+    "concreteType": "Ship",
     "kind": "LinkedField",
-    "name": "missions",
+    "name": "ships",
     "plural": true,
     "selections": [
       {
@@ -44,6 +45,13 @@ var v0 = [
         "kind": "ScalarField",
         "name": "name",
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "image",
+        "storageKey": null
       }
     ],
     "storageKey": null
@@ -54,7 +62,7 @@ return {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "MissionListQuery",
+    "name": "ShipListQuery",
     "selections": (v0/*: any*/),
     "type": "Query",
     "abstractKey": null
@@ -63,20 +71,20 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "MissionListQuery",
+    "name": "ShipListQuery",
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "6d0d04de46670483c0606ef0905ad1d7",
+    "cacheID": "184013075cb7bc3b45a04d11d7ee2cce",
     "id": null,
     "metadata": {},
-    "name": "MissionListQuery",
+    "name": "ShipListQuery",
     "operationKind": "query",
-    "text": "query MissionListQuery {\n  missions {\n    id\n    name\n  }\n}\n"
+    "text": "query ShipListQuery {\n  ships {\n    id\n    name\n    image\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "b2b15ca0b657146ea81db7ff3035662c";
+(node as any).hash = "4256a9834ee3d1f8c6eb39c5430d8817";
 
 export default node;

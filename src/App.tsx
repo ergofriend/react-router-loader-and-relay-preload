@@ -2,8 +2,8 @@ import { Suspense } from "react";
 import { useRelayEnvironment } from "react-relay";
 import { DataBrowserRouter, Route } from "react-router-dom";
 import "./App.css";
-import { MissionDetail, missionDetailLoader } from "./pages/MissionDetail";
-import { MissionList, missionListQueryLoader } from "./pages/MissionList";
+import { ShipDetail, shipDetailLoader } from "./pages/ShipDetail";
+import { ShipList, shipListQueryLoader } from "./pages/ShipList";
 
 function App() {
   const environment = useRelayEnvironment();
@@ -13,15 +13,13 @@ function App() {
         <DataBrowserRouter fallbackElement={<></>}>
           <Route
             path="/"
-            element={<MissionList />}
-            loader={() => missionListQueryLoader(environment)}
+            element={<ShipList />}
+            loader={() => shipListQueryLoader(environment)}
           />
           <Route
             path="/:id"
-            element={<MissionDetail />}
-            loader={({ params }) =>
-              missionDetailLoader(environment, params.id!)
-            }
+            element={<ShipDetail />}
+            loader={({ params }) => shipDetailLoader(environment, params.id!)}
           />
         </DataBrowserRouter>
       </Suspense>
