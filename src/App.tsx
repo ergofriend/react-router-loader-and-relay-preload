@@ -1,28 +1,38 @@
-import { Suspense } from "react";
-import { useRelayEnvironment } from "react-relay";
-import { DataBrowserRouter, Route } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { useContext, useState } from "react";
+import {
+  useLocation,
+  useOutlet,
+  UNSAFE_DataRouterContext,
+} from "react-router-dom";
 import "./App.css";
-import { ShipDetail, shipDetailLoader } from "./pages/ShipDetail";
-import { ShipList, shipListQueryLoader } from "./pages/ShipList";
+import { PageWrapper } from "./components/PageWrapper";
+
+const AnimatedOutlet: React.FC = () => {
+  let [loaderContext] = useState(useContext(UNSAFE_DataRouterContext));
+  return (
+    <UNSAFE_DataRouterContext.Provider value={loaderContext}>
+      <AnimatedOutletInner />
+    </UNSAFE_DataRouterContext.Provider>
+  );
+};
+
+const AnimatedOutletInner = () => {
+  const o = useOutlet();
+  const [outlet] = useState(o);
+  return outlet;
+};
 
 function App() {
-  const environment = useRelayEnvironment();
+  const location = useLocation();
+
   return (
     <div className="App">
-      <Suspense fallback={<div>Suspense</div>}>
-        <DataBrowserRouter fallbackElement={<></>}>
-          <Route
-            path="/"
-            element={<ShipList />}
-            loader={() => shipListQueryLoader(environment)}
-          />
-          <Route
-            path="/:id"
-            element={<ShipDetail />}
-            loader={({ params }) => shipDetailLoader(environment, params.id!)}
-          />
-        </DataBrowserRouter>
-      </Suspense>
+      <AnimatePresence initial={false}>
+        <PageWrapper key={location.pathname}>
+          <AnimatedOutlet />
+        </PageWrapper>
+      </AnimatePresence>
     </div>
   );
 }

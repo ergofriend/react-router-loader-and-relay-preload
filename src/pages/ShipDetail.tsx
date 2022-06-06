@@ -1,12 +1,7 @@
 import graphql from "babel-plugin-relay/macro";
-import {
-  Environment,
-  loadQuery,
-  PreloadedQuery,
-  usePreloadedQuery,
-} from "react-relay";
-import { useLoaderData } from "react-router-dom";
+import { Environment, loadQuery } from "react-relay";
 import { ShipDetailQuery } from "./__generated__/ShipDetailQuery.graphql";
+import { useInAppPreloadedQuery } from "../hooks/useInAppPreloadedQuery";
 
 const shipDetailQuery = graphql`
   query ShipDetailQuery($id: ID!) {
@@ -22,8 +17,7 @@ export const shipDetailLoader = (environment: Environment, shipId: string) =>
   loadQuery(environment, shipDetailQuery, { id: shipId });
 
 export const ShipDetail = () => {
-  const _data = useLoaderData() as PreloadedQuery<ShipDetailQuery>;
-  const { ship } = usePreloadedQuery<ShipDetailQuery>(shipDetailQuery, _data);
+  const { ship } = useInAppPreloadedQuery<ShipDetailQuery>(shipDetailQuery);
 
   return (
     <div>
