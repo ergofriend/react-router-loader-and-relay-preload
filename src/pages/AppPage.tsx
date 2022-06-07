@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import { AnimatedOutlet } from "../components/AnimatedOutlet";
 
@@ -28,10 +28,11 @@ export const AppPage: React.FC<Props> = () => {
       }}
     >
       <AnimatePresence initial={false}>
-        <AnimatedOutlet
+        {/* <AnimatedOutlet
           key={location.pathname.includes("app1") ? "app1" : "other"}
           name={"apps"}
-        />
+        /> */}
+        <Outlet key={location.pathname.includes("app1") ? "app1" : "other"} />
       </AnimatePresence>
     </motion.div>
   );

@@ -9,10 +9,11 @@ function App() {
   return (
     <div className="App">
       <AnimatePresence initial={false}>
-        <AnimatedOutlet
+        {/* <AnimatedOutlet
           key={location.pathname === "/" ? "/" : "*"}
           name={"root"}
-        />
+        /> */}
+        <Outlet key={location.pathname === "/" ? "/" : "*"} />
       </AnimatePresence>
     </div>
   );
