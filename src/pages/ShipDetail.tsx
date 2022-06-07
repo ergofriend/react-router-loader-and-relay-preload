@@ -2,6 +2,9 @@ import graphql from "babel-plugin-relay/macro";
 import { Environment, loadQuery } from "react-relay";
 import { ShipDetailQuery } from "./__generated__/ShipDetailQuery.graphql";
 import { useInAppPreloadedQuery } from "../hooks/useInAppPreloadedQuery";
+import { PageWrapper } from "../components/PageWrapper";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const shipDetailQuery = graphql`
   query ShipDetailQuery($id: ID!) {
@@ -17,12 +20,16 @@ export const shipDetailLoader = (environment: Environment, shipId: string) =>
   loadQuery(environment, shipDetailQuery, { id: shipId });
 
 export const ShipDetail = () => {
-  const { ship } = useInAppPreloadedQuery<ShipDetailQuery>(shipDetailQuery);
+  const { ship: _ship } =
+    useInAppPreloadedQuery<ShipDetailQuery>(shipDetailQuery);
+  const [ship] = useState(_ship);
 
   return (
-    <div>
+    <PageWrapper>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <p>ShipDetail</p>
+        <Link to="/">home</Link>
+        <Link to="/app1/">list</Link>
         {ship && (
           <>
             <p>name: {ship.name}</p>
@@ -31,6 +38,6 @@ export const ShipDetail = () => {
           </>
         )}
       </div>
-    </div>
+    </PageWrapper>
   );
 };
