@@ -13,6 +13,7 @@ import { ShipDetail, shipDetailLoader } from "./pages/ShipDetail";
 import { Home } from "./pages/Home";
 import { AppPage } from "./pages/AppPage";
 import { ShipApp } from "./pages/ShipApp";
+import { RecoilRoot } from "recoil";
 
 const environment = new Environment({
   network: Network.create(fetchGraphQL),
@@ -48,13 +49,15 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <RecoilRoot>
     <RelayEnvironmentProvider environment={environment}>
       <Suspense fallback={<div>Suspense</div>}>
         <Inner />
       </Suspense>
     </RelayEnvironmentProvider>
-  </React.StrictMode>
+  </RecoilRoot>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

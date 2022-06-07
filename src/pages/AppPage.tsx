@@ -30,6 +30,7 @@ export const AppPage: React.FC<Props> = () => {
       <AnimatePresence initial={false}>
         <AnimatedOutlet
           key={location.pathname.includes("app1") ? "app1" : "other"}
+          name={"apps"}
         />
       </AnimatePresence>
     </motion.div>

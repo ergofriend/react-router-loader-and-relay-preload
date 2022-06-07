@@ -20,7 +20,10 @@ export const shipListQueryLoader = (environment: Environment) =>
   loadQuery(environment, shipListQuery, {});
 
 export const ShipList = () => {
-  const _data = useInAppPreloadedQuery<ShipListQuery>(shipListQuery);
+  const _data = useInAppPreloadedQuery<ShipListQuery>(
+    "ShipList",
+    shipListQuery
+  );
   const [data] = useState(_data);
 
   return (

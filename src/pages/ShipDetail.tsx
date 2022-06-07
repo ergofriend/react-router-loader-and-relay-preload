@@ -20,8 +20,10 @@ export const shipDetailLoader = (environment: Environment, shipId: string) =>
   loadQuery(environment, shipDetailQuery, { id: shipId });
 
 export const ShipDetail = () => {
-  const { ship: _ship } =
-    useInAppPreloadedQuery<ShipDetailQuery>(shipDetailQuery);
+  const { ship: _ship } = useInAppPreloadedQuery<ShipDetailQuery>(
+    "ShipDetail",
+    shipDetailQuery
+  );
   const [ship] = useState(_ship);
 
   return (

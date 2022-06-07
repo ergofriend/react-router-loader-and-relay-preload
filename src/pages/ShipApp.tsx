@@ -6,7 +6,7 @@ export const ShipApp = () => {
   const location = useLocation();
   return (
     <AnimatePresence initial={false}>
-      <AnimatedOutlet key={location.pathname} />
+      <AnimatedOutlet key={location.pathname} name={"ShipApp"} />
     </AnimatePresence>
   );
 };

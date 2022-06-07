@@ -2,6 +2,12 @@ import { OperationType } from "relay-runtime";
 import { GraphQLTaggedNode, PreloadedQuery, usePreloadedQuery } from "react-relay";
 import { useLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { atomFamily, useRecoilState } from "recoil";
+
+const getLoaderDataAtom = atomFamily<any, string>({
+  key: 'useInAppLoaderData',
+  default: null,
+})
 
 const useInAppLoaderData = <TQuery extends OperationType>() => {
   try {
@@ -14,15 +20,13 @@ const useInAppLoaderData = <TQuery extends OperationType>() => {
 }
 
 export const useInAppPreloadedQuery = <TQuery extends OperationType>(
+  key: string,
   query: GraphQLTaggedNode,
-  preloadedQuery?: PreloadedQuery<TQuery>
-) => {
+  preloadedQuery?: PreloadedQuery<TQuery>,
+  ) => {
   const _data = useInAppLoaderData<TQuery>()
-  const [_cache, setCache] = useState<PreloadedQuery<TQuery>>(_data!)
-  useEffect(() => {
-    _data && setCache(_data)
-  }, [_data])
+  const [_cache] = useState<PreloadedQuery<TQuery>>(_data!)
 
-  const data = usePreloadedQuery<TQuery>(query, _cache ?? preloadedQuery);
+  const data = usePreloadedQuery<TQuery>(query, _cache ?? _data);
   return data;
 };

@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { AnimatedOutlet } from "./components/AnimatedOutlet";
 import "./App.css";
 
@@ -9,7 +9,10 @@ function App() {
   return (
     <div className="App">
       <AnimatePresence initial={false}>
-        <AnimatedOutlet key={location.pathname === "/" ? "/" : "*"} />
+        <AnimatedOutlet
+          key={location.pathname === "/" ? "/" : "*"}
+          name={"root"}
+        />
       </AnimatePresence>
     </div>
   );
