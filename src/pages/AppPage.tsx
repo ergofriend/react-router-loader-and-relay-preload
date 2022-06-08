@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Outlet, useLocation } from "react-router-dom";
+import { Suspense } from "react";
+import { useLocation, useOutlet } from "react-router-dom";
 
 import { AnimatedOutlet } from "../components/AnimatedOutlet";
 
@@ -9,6 +10,7 @@ type Props = {
 
 export const AppPage: React.FC<Props> = () => {
   const location = useLocation();
+  const o = useOutlet();
 
   return (
     <motion.div
@@ -32,7 +34,9 @@ export const AppPage: React.FC<Props> = () => {
           key={location.pathname.includes("app1") ? "app1" : "other"}
           name={"apps"}
         /> */}
-        <Outlet key={location.pathname.includes("app1") ? "app1" : "other"} />
+        <div key={location.pathname.includes("app1") ? "app1" : "other"}>
+          <Suspense fallback={<div>Suspense AppPage</div>}>{o}</Suspense>;
+        </div>
       </AnimatePresence>
     </motion.div>
   );

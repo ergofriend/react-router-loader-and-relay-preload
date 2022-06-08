@@ -1,4 +1,4 @@
-import { useState, Suspense, useEffect } from "react";
+import { useState, Suspense, useEffect, useMemo, cloneElement } from "react";
 import { useOutlet } from "react-router-dom";
 import { atom, useRecoilState } from "recoil";
 
@@ -34,5 +34,5 @@ export const AnimatedOutlet: React.FC<AnimatedOutletProps> = ({ name }) => {
 
   // if (0 < _o.length && _o[_o.length] !== name) return o;
 
-  return <Suspense fallback={<div>Suspense</div>}>{outlet}</Suspense>;
+  return <Suspense fallback={<div>Suspense</div>}>{o}</Suspense>;
 };
