@@ -5,7 +5,7 @@ type FetchGraphQL = (...args: Parameters<FetchFunction>
 
 export const fetchGraphQL: FetchGraphQL = async ( request, variables, cacheConfig) => {
 
- // Fetch data from GitHub's GraphQL API:
+ // Fetch data from SpaceX's GraphQL API:
  const response = await fetch('https://api.spacex.land/graphql/', {
   method: 'POST',
   headers: {

@@ -1,9 +1,11 @@
 import graphql from "babel-plugin-relay/macro";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Environment, loadQuery } from "react-relay";
-import { Link } from "react-router-dom";
+import { Link, LoaderFunction } from "react-router-dom";
+
 import { PageWrapper } from "../components/PageWrapper";
 import { useInAppPreloadedQuery } from "../hooks/useInAppPreloadedQuery";
+import { environment } from "../utils/relayEnviroment";
 import { ShipListQuery } from "./__generated__/ShipListQuery.graphql";
 
 const shipListQuery = graphql`
@@ -16,8 +18,13 @@ const shipListQuery = graphql`
   }
 `;
 
-export const shipListQueryLoader = (environment: Environment) =>
-  loadQuery(environment, shipListQuery, {});
+export const shipListQueryLoader: LoaderFunction = () =>
+  loadQuery(
+    environment,
+    shipListQuery,
+    {},
+    { fetchPolicy: "store-or-network" }
+  );
 
 export const ShipList = () => {
   const _data = useInAppPreloadedQuery<ShipListQuery>(
@@ -25,6 +32,13 @@ export const ShipList = () => {
     shipListQuery
   );
   const [data] = useState(_data);
+
+  useEffect(() => {
+    console.log("ShipList");
+    return () => {
+      console.log("ShipList unmounted");
+    };
+  }, []);
 
   return (
     <PageWrapper>

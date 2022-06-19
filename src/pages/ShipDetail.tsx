@@ -1,10 +1,12 @@
 import graphql from "babel-plugin-relay/macro";
-import { Environment, loadQuery } from "react-relay";
-import { ShipDetailQuery } from "./__generated__/ShipDetailQuery.graphql";
+import { Link, LoaderFunction, useNavigate } from "react-router-dom";
+import { loadQuery } from "react-relay";
+import { useState } from "react";
+
 import { useInAppPreloadedQuery } from "../hooks/useInAppPreloadedQuery";
 import { PageWrapper } from "../components/PageWrapper";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { ShipDetailQuery } from "./__generated__/ShipDetailQuery.graphql";
+import { environment } from "../utils/relayEnviroment";
 
 const shipDetailQuery = graphql`
   query ShipDetailQuery($id: ID!) {
@@ -16,8 +18,8 @@ const shipDetailQuery = graphql`
   }
 `;
 
-export const shipDetailLoader = (environment: Environment, shipId: string) =>
-  loadQuery(environment, shipDetailQuery, { id: shipId });
+export const shipDetailLoader: LoaderFunction = ({ params }) =>
+  loadQuery(environment, shipDetailQuery, { id: params.id });
 
 export const ShipDetail = () => {
   const { ship: _ship } = useInAppPreloadedQuery<ShipDetailQuery>(
@@ -25,6 +27,7 @@ export const ShipDetail = () => {
     shipDetailQuery
   );
   const [ship] = useState(_ship);
+  const navigate = useNavigate();
 
   return (
     <PageWrapper>
@@ -32,6 +35,8 @@ export const ShipDetail = () => {
         <p>ShipDetail</p>
         <Link to="/">home</Link>
         <Link to="/app1/">list</Link>
+        <p onClick={() => navigate(-1)}>navigate(-1)</p>
+        <p onClick={() => navigate(-2)}>navigate(-2)</p>
         {ship && (
           <>
             <p>name: {ship.name}</p>

@@ -1,7 +1,23 @@
 import { motion } from "framer-motion";
+import graphql from "babel-plugin-relay/macro";
 import { Link } from "react-router-dom";
+import { useLazyLoadQuery } from "react-relay";
+
+import { HomeQuery } from "./__generated__/HomeQuery.graphql";
 
 export const Home = () => {
+  const data = useLazyLoadQuery<HomeQuery>(
+    graphql`
+      query HomeQuery {
+        company {
+          name
+        }
+      }
+    `,
+    {},
+    { fetchPolicy: "store-and-network" }
+  );
+
   return (
     <motion.div
       style={{
@@ -23,7 +39,8 @@ export const Home = () => {
       }}
     >
       <p>Home</p>
-      <Link to="/app1">app1</Link>
+      <p>{data.company?.name}</p>
+      <Link to="/ship-app">ship-app</Link>
     </motion.div>
   );
 };

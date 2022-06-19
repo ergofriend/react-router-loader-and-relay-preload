@@ -2,13 +2,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Suspense } from "react";
 import { useLocation, useOutlet } from "react-router-dom";
 
-import { AnimatedOutlet } from "../components/AnimatedOutlet";
-
 type Props = {
   // children: React.ReactNode;
 };
 
-export const AppPage: React.FC<Props> = () => {
+export const AppsWrapper: React.FC<Props> = () => {
   const location = useLocation();
   const o = useOutlet();
 
@@ -30,10 +28,6 @@ export const AppPage: React.FC<Props> = () => {
       }}
     >
       <AnimatePresence initial={false}>
-        {/* <AnimatedOutlet
-          key={location.pathname.includes("app1") ? "app1" : "other"}
-          name={"apps"}
-        /> */}
         <div key={location.pathname.includes("app1") ? "app1" : "other"}>
           <Suspense fallback={<div>Suspense AppPage</div>}>{o}</Suspense>;
         </div>
