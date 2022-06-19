@@ -7,7 +7,14 @@ export const Root = () => {
   const o = useOutlet();
 
   return (
-    <div className="App">
+    <div
+      style={{
+        position: "relative",
+        height: "100vh",
+        width: "100vw",
+        overflow: "hidden",
+      }}
+    >
       <AnimatePresence initial={false}>
         <Suspense
           key={location.pathname === "/" ? "/" : "*"}

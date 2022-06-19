@@ -33,6 +33,7 @@ export const PageWrapper: React.FC<Props> = ({ children }) => {
         left: 0,
         height: "100vh",
         width: "100vw",
+        overflow: "scroll",
       }}
     >
       {children}

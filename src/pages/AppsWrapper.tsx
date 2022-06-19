@@ -20,9 +20,13 @@ export const AppsWrapper: React.FC = () => {
         width: "100vw",
         backgroundColor: "skyblue",
       }}
-      initial={{ scale: 0, x: "200px", y: "200px" }}
-      animate={{ scale: 1, x: 0, y: 0 }}
-      exit={{ scale: 0, x: "200px", y: "200px" }}
+      initial={{
+        scale: 0,
+      }}
+      animate={{ scale: 1, left: 0, top: 0 }}
+      exit={{
+        scale: 0,
+      }}
       transition={{
         duration: 3,
         ease: "easeOut",
