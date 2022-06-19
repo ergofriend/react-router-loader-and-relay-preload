@@ -19,21 +19,13 @@ Relay Render-as-You-Fetch with react-router
 
 ```typescript
 <DataBrowserRouter fallbackElement={<></>}>
-  <Route
-    path="/"
-    element={<ShipList />}
-    loader={() => shipListQueryLoader(environment)}
-  />
-  <Route
-    path="/:id"
-    element={<ShipDetail />}
-    loader={({ params }) => shipDetailLoader(environment, params.id!)}
-  />
+  <Route path="/" element={<ShipList />} loader={shipListQueryLoader} />
+  <Route path="/:id" element={<ShipDetail />} loader={shipDetailLoader} />
 </DataBrowserRouter>
 ```
 
 ```typescript
-export const shipListQueryLoader = (environment: Environment) =>
+export const shipListQueryLoader = () =>
   loadQuery(environment, shipListQuery, {});
 
 export const ShipList = () => {
@@ -42,8 +34,8 @@ export const ShipList = () => {
 ```
 
 ```typescript
-export const shipDetailLoader = (environment: Environment, shipId: string) =>
-  loadQuery(environment, shipDetailQuery, { id: shipId });
+export const shipDetailLoader: LoaderFunction = ({params}) =>
+  loadQuery(environment, shipDetailQuery, { id: params.id });
 
 export const ShipDetail = () => {
   const _data = useLoaderData() as PreloadedQuery<ShipDetailQuery>;
