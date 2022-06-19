@@ -7,6 +7,25 @@ import { AppWrapper } from "./pages/AppWrapper";
 import { ShipDetail, shipDetailLoader } from "./pages/ShipDetail";
 import { ShipList, shipListQueryLoader } from "./pages/ShipList";
 
+export const appsRoute: RouteObject[] = [
+  {
+    path: "ship-app",
+    element: <AppWrapper />,
+    children: [
+      {
+        path: ":id",
+        element: <ShipDetail />,
+        loader: shipDetailLoader,
+      },
+      {
+        path: "",
+        element: <ShipList />,
+        loader: shipListQueryLoader,
+      },
+    ],
+  },
+];
+
 export const routes: RouteObject[] = [
   {
     path: "",
@@ -19,24 +38,7 @@ export const routes: RouteObject[] = [
       {
         path: "*",
         element: <AppsWrapper />,
-        children: [
-          {
-            path: "ship-app",
-            element: <AppWrapper />,
-            children: [
-              {
-                path: ":id",
-                element: <ShipDetail />,
-                loader: shipDetailLoader,
-              },
-              {
-                path: "",
-                element: <ShipList />,
-                loader: shipListQueryLoader,
-              },
-            ],
-          },
-        ],
+        children: appsRoute,
       },
     ],
   },

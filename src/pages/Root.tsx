@@ -1,7 +1,6 @@
+import { Suspense } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useLocation, useOutlet } from "react-router-dom";
-import "./Root.css";
-import { Suspense } from "react";
 
 export const Root = () => {
   const location = useLocation();
@@ -10,9 +9,13 @@ export const Root = () => {
   return (
     <div className="App">
       <AnimatePresence initial={false}>
-        <div key={location.pathname === "/" ? "/" : "*"}>
-          <Suspense fallback={<div>Suspense Root</div>}>{o}</Suspense>;
-        </div>
+        <Suspense
+          key={location.pathname === "/" ? "/" : "*"}
+          fallback={<div>Suspense Root</div>}
+        >
+          {o}
+        </Suspense>
+        ;
       </AnimatePresence>
     </div>
   );

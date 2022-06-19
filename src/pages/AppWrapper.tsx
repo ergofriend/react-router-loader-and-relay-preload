@@ -8,9 +8,12 @@ export const AppWrapper = () => {
 
   return (
     <AnimatePresence initial={false}>
-      <div key={location.pathname}>
-        <Suspense fallback={<div>Suspense ShipApp</div>}>{o}</Suspense>;
-      </div>
+      <Suspense
+        key={location.pathname}
+        fallback={<div>Suspense AppWrapper</div>}
+      >
+        {o}
+      </Suspense>
     </AnimatePresence>
   );
 };

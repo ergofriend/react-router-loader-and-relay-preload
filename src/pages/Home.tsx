@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useLazyLoadQuery } from "react-relay";
 
 import { HomeQuery } from "./__generated__/HomeQuery.graphql";
+import { appsRoute } from "../routes";
 
 export const Home = () => {
   const data = useLazyLoadQuery<HomeQuery>(
@@ -21,11 +22,11 @@ export const Home = () => {
   return (
     <motion.div
       style={{
-        top: 70,
-        left: 70,
+        top: 0,
+        left: 0,
         position: "absolute",
-        height: "80vh",
-        width: "80vw",
+        height: "100vh",
+        width: "100vw",
         display: "flex",
         flexDirection: "column",
         backgroundColor: "grey",
@@ -39,8 +40,16 @@ export const Home = () => {
       }}
     >
       <p>Home</p>
-      <p>{data.company?.name}</p>
-      <Link to="/ship-app">ship-app</Link>
+      <p>HomeQuery: {data.company?.name}</p>
+      <p>apps</p>
+      {appsRoute.map((appRoute) => {
+        const path = appRoute.path!;
+        return (
+          <Link key={path} to={path}>
+            ship-app
+          </Link>
+        );
+      })}
     </motion.div>
   );
 };

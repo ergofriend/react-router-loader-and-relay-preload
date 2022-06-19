@@ -1,14 +1,15 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Suspense } from "react";
+import { Suspense, useMemo } from "react";
 import { useLocation, useOutlet } from "react-router-dom";
 
-type Props = {
-  // children: React.ReactNode;
-};
-
-export const AppsWrapper: React.FC<Props> = () => {
+export const AppsWrapper: React.FC = () => {
   const location = useLocation();
   const o = useOutlet();
+
+  const key = useMemo(
+    () => location.pathname.split("/")[1],
+    [location.pathname]
+  );
 
   return (
     <motion.div
@@ -28,9 +29,9 @@ export const AppsWrapper: React.FC<Props> = () => {
       }}
     >
       <AnimatePresence initial={false}>
-        <div key={location.pathname.includes("app1") ? "app1" : "other"}>
-          <Suspense fallback={<div>Suspense AppPage</div>}>{o}</Suspense>;
-        </div>
+        <Suspense key={key} fallback={<div>Suspense AppsWrapper</div>}>
+          {o}
+        </Suspense>
       </AnimatePresence>
     </motion.div>
   );
