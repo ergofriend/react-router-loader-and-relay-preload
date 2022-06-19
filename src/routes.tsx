@@ -6,6 +6,8 @@ import { AppsWrapper } from "./pages/AppsWrapper";
 import { AppWrapper } from "./pages/AppWrapper";
 import { ShipDetail, shipDetailLoader } from "./pages/ShipDetail";
 import { ShipList, shipListQueryLoader } from "./pages/ShipList";
+import { RocketDetail, rocketDetailLoader } from "./pages/RocketDetail";
+import { RocketList, rocketListQueryLoader } from "./pages/RocketList";
 
 export const appsRoute: RouteObject[] = [
   {
@@ -21,6 +23,22 @@ export const appsRoute: RouteObject[] = [
         path: "",
         element: <ShipList />,
         loader: shipListQueryLoader,
+      },
+    ],
+  },
+  {
+    path: "rocket-app",
+    element: <AppWrapper />,
+    children: [
+      {
+        path: ":id",
+        element: <RocketDetail />,
+        loader: rocketDetailLoader,
+      },
+      {
+        path: "",
+        element: <RocketList />,
+        loader: rocketListQueryLoader,
       },
     ],
   },

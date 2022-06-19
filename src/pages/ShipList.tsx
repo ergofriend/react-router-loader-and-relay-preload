@@ -2,6 +2,7 @@ import graphql from "babel-plugin-relay/macro";
 import { loadQuery } from "react-relay";
 import { Link, LoaderFunction } from "react-router-dom";
 
+import { NavBar } from "../components/NavBar";
 import { PageWrapper } from "../components/PageWrapper";
 import { useInAppPreloadedQuery } from "../hooks/useInAppPreloadedQuery";
 import { environment } from "../utils/relayEnviroment";
@@ -31,7 +32,7 @@ export const ShipList = () => {
   return (
     <PageWrapper>
       ShipList
-      <Link to="/">home</Link>
+      <NavBar />
       <div style={{ display: "flex", flexDirection: "column" }}>
         {data.ships?.map(
           (ship) =>

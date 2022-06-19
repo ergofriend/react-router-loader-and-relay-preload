@@ -26,6 +26,7 @@ export const PageWrapper: React.FC<Props> = ({ children }) => {
       }}
       transition={{
         duration: 3,
+        ease: "easeOut",
       }}
       style={{
         position: "absolute",

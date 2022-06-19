@@ -1,11 +1,12 @@
 import graphql from "babel-plugin-relay/macro";
-import { Link, LoaderFunction, useNavigate } from "react-router-dom";
+import { LoaderFunction } from "react-router-dom";
 import { loadQuery } from "react-relay";
 
 import { useInAppPreloadedQuery } from "../hooks/useInAppPreloadedQuery";
 import { PageWrapper } from "../components/PageWrapper";
 import { ShipDetailQuery } from "./__generated__/ShipDetailQuery.graphql";
 import { environment } from "../utils/relayEnviroment";
+import { NavBar } from "../components/NavBar";
 
 const shipDetailQuery = graphql`
   query ShipDetailQuery($id: ID!) {
@@ -25,16 +26,12 @@ export const ShipDetail = () => {
     "ShipDetail",
     shipDetailQuery
   );
-  const navigate = useNavigate();
 
   return (
     <PageWrapper>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <p>ShipDetail</p>
-        <Link to="/">home</Link>
-        <Link to="/app1/">list</Link>
-        <p onClick={() => navigate(-1)}>navigate(-1)</p>
-        <p onClick={() => navigate(-2)}>navigate(-2)</p>
+        <NavBar />
         {ship && (
           <>
             <p>name: {ship.name}</p>

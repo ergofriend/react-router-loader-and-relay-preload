@@ -40,13 +40,13 @@ export const Home = () => {
       }}
     >
       <p>Home</p>
-      <p>HomeQuery: {data.company?.name}</p>
+      <p>company name: {data.company?.name}</p>
       <p>apps</p>
       {appsRoute.map((appRoute) => {
         const path = appRoute.path!;
         return (
           <Link key={path} to={path}>
-            ship-app
+            {path}
           </Link>
         );
       })}
