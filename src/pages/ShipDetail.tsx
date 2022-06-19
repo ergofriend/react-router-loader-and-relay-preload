@@ -37,6 +37,7 @@ export const ShipDetail = () => {
             <p>name: {ship.name}</p>
             <p>model: {ship.model}</p>
             <p>image: {ship.image}</p>
+            {ship.image && <img src={ship.image} alt="" />}
           </>
         )}
       </div>
