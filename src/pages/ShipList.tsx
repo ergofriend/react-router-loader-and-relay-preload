@@ -1,6 +1,5 @@
 import graphql from "babel-plugin-relay/macro";
-import { useEffect, useState } from "react";
-import { Environment, loadQuery } from "react-relay";
+import { loadQuery } from "react-relay";
 import { Link, LoaderFunction } from "react-router-dom";
 
 import { PageWrapper } from "../components/PageWrapper";
@@ -27,18 +26,7 @@ export const shipListQueryLoader: LoaderFunction = () =>
   );
 
 export const ShipList = () => {
-  const _data = useInAppPreloadedQuery<ShipListQuery>(
-    "ShipList",
-    shipListQuery
-  );
-  const [data] = useState(_data);
-
-  useEffect(() => {
-    console.log("ShipList");
-    return () => {
-      console.log("ShipList unmounted");
-    };
-  }, []);
+  const data = useInAppPreloadedQuery<ShipListQuery>("ShipList", shipListQuery);
 
   return (
     <PageWrapper>

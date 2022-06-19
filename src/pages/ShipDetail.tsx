@@ -1,7 +1,6 @@
 import graphql from "babel-plugin-relay/macro";
 import { Link, LoaderFunction, useNavigate } from "react-router-dom";
 import { loadQuery } from "react-relay";
-import { useState } from "react";
 
 import { useInAppPreloadedQuery } from "../hooks/useInAppPreloadedQuery";
 import { PageWrapper } from "../components/PageWrapper";
@@ -22,11 +21,10 @@ export const shipDetailLoader: LoaderFunction = ({ params }) =>
   loadQuery(environment, shipDetailQuery, { id: params.id });
 
 export const ShipDetail = () => {
-  const { ship: _ship } = useInAppPreloadedQuery<ShipDetailQuery>(
+  const { ship } = useInAppPreloadedQuery<ShipDetailQuery>(
     "ShipDetail",
     shipDetailQuery
   );
-  const [ship] = useState(_ship);
   const navigate = useNavigate();
 
   return (

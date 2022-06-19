@@ -13,20 +13,20 @@ const useInAppLoaderData = <TQuery extends OperationType>() => {
   return null
 }
 
-let tmp: Record<string, any> = {}
+const tmp: Record<string, any> = {}
 
 export const useInAppPreloadedQuery = <TQuery extends OperationType>(
   key: string,
   query: GraphQLTaggedNode,
-  preloadedQuery?: PreloadedQuery<TQuery>,
   ) => {
   const _data = useInAppLoaderData<TQuery>()
+  const [_cache] = useState<PreloadedQuery<TQuery>>(_data!)
+  
   useEffect(() => {
      if (_data) {
       tmp[key] = _data
      }
   }, [_data, key])
-  const [_cache] = useState<PreloadedQuery<TQuery>>(_data!)
 
   const data = usePreloadedQuery<TQuery>(query, _cache ?? tmp[key]);
   return data;
