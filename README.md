@@ -15,12 +15,18 @@ Relay Render-as-You-Fetch with react-router
 - usePreloadedQuery
 - https://relay.dev/docs/api-reference/use-preloaded-query/
 
+
+
+https://user-images.githubusercontent.com/29725082/174469191-e06001db-c6e5-4143-9ada-b2b0d9cab6e0.mov
+
+
+
 ## Code
 
 ```typescript
 <DataBrowserRouter fallbackElement={<></>}>
-  <Route path="/" element={<ShipList />} loader={shipListQueryLoader} />
-  <Route path="/:id" element={<ShipDetail />} loader={shipDetailLoader} />
+  <Route path="/" element={ShipList} loader={shipListQueryLoader} />
+  <Route path="/:id" element={ShipDetail} loader={shipDetailLoader} />
 </DataBrowserRouter>
 ```
 
